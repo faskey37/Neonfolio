@@ -4,18 +4,29 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
+import { Menu, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
-const navLinks = [
+const mainNavLinks = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About' },
-  { href: '#education', label: 'Education' },
-  { href: '#interests', label: 'Interests' },
-  { href: '#skills', label: 'Skills' },
   { href: '#experience', label: 'Experience' },
+  { href: '#skills', label: 'Skills' },
   { href: '#projects', label: 'Projects' },
 ];
+
+const moreNavLinks = [
+    { href: '#education', label: 'Education' },
+    { href: '#achievements', label: 'Achievements' },
+    { href: '#certificates', label: 'Certificates' },
+    { href: '#volunteering', label: 'Volunteering' },
+]
 
 export function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -28,6 +39,8 @@ export function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const allNavLinks = [...mainNavLinks, ...moreNavLinks];
 
   return (
     <header className={cn(
@@ -42,11 +55,25 @@ export function Header() {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
-          {navLinks.map(link => (
+          {mainNavLinks.map(link => (
             <Link key={link.href} href={link.href} className="text-muted-foreground transition-colors hover:text-primary px-3 py-2 rounded-md">
               {link.label}
             </Link>
           ))}
+           <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="text-muted-foreground transition-colors hover:text-primary px-3 py-2 rounded-md">
+                More <ChevronDown className="ml-1 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {moreNavLinks.map((link) => (
+                <DropdownMenuItem key={link.href} asChild>
+                  <Link href={link.href}>{link.label}</Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button asChild className="font-bold bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90 transition-opacity ml-2">
             <Link href="#contact">Contact Me</Link>
           </Button>
@@ -68,7 +95,7 @@ export function Header() {
                     <span className="text-xl font-bold font-headline tracking-tighter text-gradient">Tauqeer Khan</span>
                 </Link>
                 <nav className="flex flex-col gap-4">
-                  {navLinks.map(link => (
+                  {allNavLinks.map(link => (
                     <Link 
                       key={link.href} 
                       href={link.href} 

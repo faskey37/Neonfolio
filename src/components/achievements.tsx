@@ -7,7 +7,7 @@ const achievements = [
     title: 'ACM Student Chapter Installation – Member Recognition',
     date: '22nd August 2025',
     description: 'Recognized as a member of ACM Student Chapter at ACET during the official installation program. Received badge of membership in presence of Dr. Devishree Naidu (Vice Chair, ACM Nagpur Chapter) and Principal Dr. K.S. Zakiuddin.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://raw.githubusercontent.com/faskey37/My-Portfolio/b0894122f0a6fca77bc419f6975e57d137d973fb/WhatsApp%20Image%202025-08-22%20at%2023.08.24_930d37df.jpg',
     imageHint: 'group photo event',
   },
 ];

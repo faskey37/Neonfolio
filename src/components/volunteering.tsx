@@ -14,7 +14,7 @@ const volunteeringData = [
       'Helped in spreading awareness messages on traffic rules and road safety.',
     ],
     reflection: "Being part of this campaign gave me an opportunity to contribute towards community welfare and learn the importance of teamwork in social initiatives.",
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://github.com/faskey37/My-Portfolio/blob/main/WhatsApp%20Image%202025-08-24%20at%2023.38.43_76362cbf.jpg?raw=true',
     imageHint: 'community event volunteering',
   },
 ];

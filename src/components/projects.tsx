@@ -78,32 +78,29 @@ const projects: Project[] = [
    {
     title: 'E-commerce Store UI',
     description: 'A sleek and modern user interface for an e-commerce platform, focusing on a clean user experience and responsive design for both mobile and desktop.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://images.unsplash.com/photo-1664455340023-214c33a9d0bd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZSUyMGNvbW1lcmNlfGVufDB8fDB8fHww',
     imageHint: 'online shopping e-commerce',
     tags: ['React', 'Tailwind CSS', 'UI/UX'],
-    liveUrl: '#',
-    codeUrl: '#',
+    codeUrl: 'https://github.com/faskey37/e-commerce',
     category: 'frontend'
   },
   {
     title: 'Finview app',
     description: 'a personal finance dashboard designed to help users track expenses, manage budgets, and get AI-powered savings insights.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://images.unsplash.com/photo-1620266757065-5814239881fd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fGZpbmFuY2V8ZW58MHx8MHx8fDA%3D',
     imageHint: 'API code server',
     tags: ['Node.js', 'React', 'Firebase', 'API'],
-    liveUrl: '#',
-    codeUrl: '#',
+    codeUrl: 'https://github.com/faskey37/finview-app',
     category: 'backend'
   },
   {
     title: 'React survey app-',
     description: 'I built a very simple survey app using only frontend code.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://plus.unsplash.com/premium_photo-1739270635195-ecd0e0da747b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3VydmV5JTIwYXBwfGVufDB8fDB8fHww',
     imageHint: 'weather forecast dashboard',
-    tags: ['React', 'Tailwind', 'JavaScript'],
-    liveUrl: '#',
-    codeUrl: '#',
-    category: 'fullstack'
+    tags: ['React', 'Tailwind', 'JavaScript'], 
+    codeUrl: 'https://github.com/faskey37/survey-app',
+    category: 'frontend'
   },
 ];
 
