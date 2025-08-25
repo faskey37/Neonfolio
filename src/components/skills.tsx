@@ -17,6 +17,7 @@ const skillCategories = [
     icon: "fas fa-server",
     skills: [
         { name: "Java", level: 70 },
+        { name: "Python", level: 65 },
         { name: "Firebase", level: 85 },
         { name: "MySQL", level: 78 },
         { name: "PostgreSQL", level: 75 },
