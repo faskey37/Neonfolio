@@ -2,6 +2,9 @@
 
 import {z} from 'zod';
 import {askChatbot} from '@/ai/flows/portfolio-chat';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+
 
 const chatSchema = z.object({
   query: z.string().min(1, 'Please enter a message.'),
@@ -76,16 +79,25 @@ export async function sendContactMessageAction(
 
   const { name, email, subject, message } = validatedFields.data;
 
-  // Here you would typically send the data to your email or a database.
-  // For this example, we'll just log it to the server console.
-  console.log('New Contact Form Submission:');
-  console.log('Name:', name);
-  console.log('Email:', email);
-  console.log('Subject:', subject);
-  console.log('Message:', message);
+  try {
+    const messagesCollection = collection(db, 'messages');
+    await addDoc(messagesCollection, {
+      name,
+      email,
+      subject,
+      message,
+      createdAt: serverTimestamp(),
+    });
 
-  return {
-    message: "Thank you for your message! I'll get back to you soon.",
-    success: true,
-  };
+    return {
+      message: "Thank you for your message! It has been saved successfully.",
+      success: true,
+    };
+  } catch(e) {
+    console.error("Error adding document: ", e);
+    return {
+        message: 'There was an error saving your message. Please try again.',
+        success: false
+    }
+  }
 }
