@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%; /* light-color */
+    --foreground: 0 0% 10%; /* dark-color */
+    --card: 0 0% 100%; /* lighter-color */
+    --card-foreground: 0 0% 10%; /* dark-color */
+    --popover: 0 0% 98%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 217 91% 60%; /* #3b82f6 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 262 83% 65%; /* #8b5cf6 */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 95%; /* gray-light */
+    --muted-foreground: 48 8% 45%; /* gray-color */
+    --accent: 39 96% 55%; /* #f59e0b */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 90%; /* gray-light */
+    --input: 0 0% 90%;
+    --ring: 217 91% 60%;
+    --radius: 0.8rem;
+  }
+
+  .dark {
+    --background: 0 0% 5%; /* darker-color */
+    --foreground: 0 0% 96%; /* light-color */
+    --card: 0 0% 8%; /* dark-color */
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 262 83% 65%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 39 96% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    scroll-behavior: smooth;
+  }
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
