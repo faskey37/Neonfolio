@@ -1,8 +1,9 @@
+import { Code, Server, Settings, Cpu, Database, GitBranch } from 'lucide-react';
 
 const skillCategories = [
   {
     title: "Frontend Development",
-    icon: "fas fa-laptop-code",
+    icon: <Code className="w-6 h-6" />,
     skills: [
       { name: "HTML5 & CSS3", level: 95 },
       { name: "JavaScript", level: 90 },
@@ -14,7 +15,7 @@ const skillCategories = [
   },
   {
     title: "Backend Development",
-    icon: "fas fa-server",
+    icon: <Server className="w-6 h-6" />,
     skills: [
         { name: "Java", level: 70 },
         { name: "Python", level: 65 },
@@ -26,7 +27,7 @@ const skillCategories = [
   },
   {
     title: "Other Skills",
-    icon: "fas fa-tools",
+    icon: <Settings className="w-6 h-6" />,
     skills: [
         { name: "Git & GitHub", level: 90 },
         { name: "Docker", level: 70 },
@@ -45,23 +46,23 @@ export function Skills() {
           <div className="absolute text-primary/10 text-7xl font-mono font-bold top-10 left-10 animate-[float_10s_ease-in-out_infinite]">&#123;...&#125;</div>
           <div className="absolute text-secondary/10 text-6xl font-mono font-bold bottom-10 right-10 animate-[float-alt_8s_ease-in-out_infinite]">[Array]</div>
           <div className="absolute text-accent/10 text-5xl font-mono font-bold top-1/2 right-1/4 animate-[float_7s_ease-in-out_infinite]">=</div>
-           <div className="absolute text-primary/5 text-8xl font-mono font-bold bottom-1/4 left-1/5 animate-[float-alt_11s_ease-in-out_infinite]">&lt;div&gt;</div>
+          <div className="absolute text-primary/5 text-8xl font-mono font-bold bottom-1/4 left-1/5 animate-[float-alt_11s_ease-in-out_infinite]">&lt;div&gt;</div>
           <div className="absolute text-secondary/5 text-4xl font-mono font-bold top-1/3 right-1/5 animate-[float_9s_ease-in-out_infinite]">.map()</div>
-      </div>
+        </div>
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-2xl mx-auto">
                 <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">
                     My Technical <span className="text-gradient">Toolbelt</span>
                 </h2>
-                <p className="mt-4 text-lg leading-8 text-muted-foreground">
+                <div className="mt-4 text-lg leading-8 text-muted-foreground">
                     A snapshot of the primary technologies and tools I use to bring ideas to life, from frontend design to backend implementation.
-                </p>
+                </div>
             </div>
             <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
             {skillCategories.map((category) => (
-                <div key={category.title} className="bg-card p-6 rounded-lg shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:scale-105">
+                <div key={category.title} className="bg-card p-6 rounded-lg shadow-lg border border-border/20 transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
                     <h3 className="text-xl font-bold font-headline mb-6 flex items-center gap-3">
-                        <i className={`${category.icon} text-2xl text-gradient`}></i>
+                        <span className="text-gradient">{category.icon}</span>
                         {category.title}
                     </h3>
                     <ul className="space-y-4">
@@ -69,8 +70,12 @@ export function Skills() {
                             <li key={skill.name}>
                                 <span className="font-medium text-muted-foreground">{skill.name}</span>
                                 <div className="w-full bg-primary/10 rounded-full h-2.5 mt-1">
-                                    <div className="bg-gradient-to-r from-primary to-secondary h-2.5 rounded-full" style={{width: `${skill.level}%`}}></div>
+                                    <div 
+                                      className="bg-gradient-to-r from-primary to-secondary h-2.5 rounded-full transition-all duration-700 ease-out" 
+                                      style={{width: `${skill.level}%`}}
+                                    ></div>
                                 </div>
+                                <div className="text-xs text-muted-foreground mt-1 text-right">{skill.level}%</div>
                             </li>
                         ))}
                     </ul>
@@ -79,5 +84,5 @@ export function Skills() {
             </div>
         </div>
     </section>
-  )
+  );
 }
