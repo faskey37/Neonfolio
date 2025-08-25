@@ -1,41 +1,51 @@
 "use client";
 
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { useFormState, useFormStatus } from 'react-dom';
+import { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Github, Linkedin, Mail, Twitter, Instagram, Phone, MapPin } from 'lucide-react';
 import Link from 'next/link';
+import { sendContactMessageAction, type ContactFormState } from '@/app/actions';
 
-const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters.'),
-  email: z.string().email('Invalid email address.'),
-  subject: z.string().min(5, 'Subject must be at least 5 characters.'),
-  message: z.string().min(10, 'Message must be at least 10 characters.'),
-});
+const initialState: ContactFormState = {
+  message: '',
+  errors: {},
+  success: false,
+};
 
-type ContactFormInputs = z.infer<typeof contactSchema>;
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" className="w-full font-bold bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90 transition-opacity" disabled={pending}>
+      {pending ? 'Sending...' : 'Send Message'}
+    </Button>
+  );
+}
 
 export function Contact() {
+  const [state, formAction] = useFormState(sendContactMessageAction, initialState);
   const { toast } = useToast();
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<ContactFormInputs>({
-    resolver: zodResolver(contactSchema),
-  });
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const onSubmit: SubmitHandler<ContactFormInputs> = async (data) => {
-    // Here you would typically send the data to a serverless function or API endpoint
-    console.log(data);
-    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for getting in touch. I'll get back to you soon.",
-    });
-    reset();
-  };
+  useEffect(() => {
+    if (state.success) {
+      toast({
+        title: "Message Sent!",
+        description: state.message,
+      });
+      formRef.current?.reset();
+    } else if (state.message && state.errors) {
+       toast({
+        title: "Oops! Something went wrong.",
+        description: state.message,
+        variant: "destructive",
+      });
+    }
+  }, [state, toast]);
+
 
   return (
     <section id="contact" className="py-24 sm:py-32">
@@ -76,26 +86,24 @@ export function Contact() {
           <div className="bg-background/50 p-8 rounded-lg">
             <h3 className="text-2xl font-bold mb-2">Send Me a Message</h3>
             <p className="text-muted-foreground mb-6">Fill out the form below and I'll get back to you soon.</p>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <form ref={formRef} action={formAction} className="space-y-4">
               <div>
-                <Input {...register('name')} placeholder="Full Name" className="bg-card" />
-                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+                <Input name="name" placeholder="Full Name" className="bg-card" />
+                {state.errors?.name && <p className="text-red-500 text-sm mt-1">{state.errors.name[0]}</p>}
               </div>
               <div>
-                <Input {...register('email')} placeholder="Email Address" type="email" className="bg-card" />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+                <Input name="email" placeholder="Email Address" type="email" className="bg-card" />
+                {state.errors?.email && <p className="text-red-500 text-sm mt-1">{state.errors.email[0]}</p>}
               </div>
               <div>
-                <Input {...register('subject')} placeholder="Subject" className="bg-card" />
-                {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject.message}</p>}
+                <Input name="subject" placeholder="Subject" className="bg-card" />
+                {state.errors?.subject && <p className="text-red-500 text-sm mt-1">{state.errors.subject[0]}</p>}
               </div>
               <div>
-                <Textarea {...register('message')} placeholder="Your message..." className="bg-card" rows={5} />
-                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
+                <Textarea name="message" placeholder="Your message..." className="bg-card" rows={5} />
+                {state.errors?.message && <p className="text-red-500 text-sm mt-1">{state.errors.message[0]}</p>}
               </div>
-              <Button type="submit" className="w-full font-bold bg-gradient-to-r from-primary to-secondary text-primary-foreground hover:opacity-90 transition-opacity" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </Button>
+              <SubmitButton />
             </form>
           </div>
         </div>
