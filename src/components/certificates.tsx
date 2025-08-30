@@ -17,7 +17,7 @@ const certificates = [
     title: 'Hackathon Participation Certificate',
     issuer: 'Build 4 Change Hackathon',
     date: 'Aug 2025',
-    image: '',
+    image: 'https://github.com/faskey37/My-Portfolio/blob/main/Screenshot%202025-08-30%20200201.png?raw=true',
     imageHint: 'hackathon participation certificate',
     url: '#',
   },
