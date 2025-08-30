@@ -19,9 +19,34 @@ export function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary/5"
     >
-      <div className="absolute inset-0 z-0 opacity-30">
-        <div className="absolute top-[-50%] left-[-50%] h-[200%] w-[200%] bg-[radial-gradient(rgba(153,0,0,0.1)_1px,transparent_1px)] [background-size:30px_30px] animate-[movePattern_60s_linear_infinite]"></div>
+      <div className="absolute inset-0 z-0 opacity-50" style={{backgroundImage: 'url("https://www.transparenttextures.com/patterns/asfalt-dark.png")'}}></div>
+      <div className="absolute inset-0 z-0" id="ember-container">
+        {Array.from({ length: 50 }).map((_, i) => (
+            <div key={i} className="ember" />
+        ))}
       </div>
+       <style jsx>{`
+        @keyframes rise {
+          to {
+            transform: translateY(-100vh);
+            opacity: 0;
+          }
+        }
+        .ember {
+          position: absolute;
+          width: 3px;
+          height: 3px;
+          background: hsl(var(--accent));
+          border-radius: 50%;
+          bottom: -10px;
+          opacity: 0.7;
+          animation: rise 10s infinite;
+          left: ${() => Math.random() * 100}vw;
+          animation-duration: ${() => Math.random() * 5 + 5}s;
+          animation-delay: ${() => Math.random() * 10}s;
+          box-shadow: 0 0 5px hsl(var(--accent)), 0 0 10px hsl(var(--accent));
+        }
+      `}</style>
       
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -61,7 +86,7 @@ export function Hero() {
             </div>
           </div>
           <div className="relative hidden md:block animate-[float_6s_ease-in-out_infinite]">
-            <div className="w-[400px] h-[400px] lg:w-[450px] lg:h-[450px] rounded-full overflow-hidden shadow-2xl border-4 border-background mx-auto">
+            <div className="w-[400px] h-[400px] lg:w-[450px] lg:h-[450px] rounded-full overflow-hidden shadow-fiery border-4 border-background mx-auto">
               <Image
                 unoptimized
                 src="https://raw.githubusercontent.com/faskey37/My-Portfolio/main/my.jpg"

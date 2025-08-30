@@ -1,3 +1,4 @@
+
 const timelineData = [
   {
     date: "2025 - Present",
@@ -51,7 +52,7 @@ export function Timeline() {
                     <div className="bg-card p-6 rounded-lg shadow-lg border border-border/20 transition-all duration-300 ease-in-out group-hover:shadow-xl group-hover:-translate-y-1 group-hover:scale-105">
                       <span className="inline-block px-3 py-1 text-xs font-semibold text-primary-foreground bg-gradient-to-r from-primary to-secondary rounded-full mb-2">{item.date}</span>
                       <h3 className="text-xl font-bold font-headline mb-1">{item.title}</h3>
-                      <p className="text-muted-foreground text-sm mb-4 flex items-center gap-2 justify-start md:justify-end">
+                      <p className="text-muted-foreground text-sm mb-4 flex items-center gap-2 justify-start md:justify-end md:text-right">
                          {item.company} <i className={`${item.icon}`}></i>
                       </p>
                       <p className="text-muted-foreground">{item.description}</p>
@@ -63,7 +64,7 @@ export function Timeline() {
                     </div>
                 </div>
               </div>
-              <div className="absolute top-1 left-4 md:left-1/2 -ml-2.5 w-5 h-5 bg-background border-2 border-primary rounded-full transition-transform duration-300 group-hover:scale-125"></div>
+              <div className="absolute top-1 left-[7px] md:left-1/2 -ml-2.5 w-5 h-5 bg-background border-2 border-primary rounded-full transition-transform duration-300 group-hover:scale-125"></div>
             </div>
           ))}
         </div>

@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from "next/image";
@@ -18,7 +19,7 @@ export function About() {
             <h2 className="text-3xl sm:text-4xl font-bold font-headline text-center mb-16">About <span className="text-gradient">Me</span></h2>
             <div className="grid md:grid-cols-5 gap-16 items-center">
                 <div className="md:col-span-2 relative w-full max-w-sm mx-auto group">
-                    <div className="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-lg blur-lg opacity-50 animate-pulse group-hover:opacity-75 transition-opacity duration-300"></div>
+                    <div className="absolute -inset-4 bg-gradient-to-r from-primary to-secondary rounded-lg blur-lg opacity-50 animate-pulse-glow transition-opacity duration-300"></div>
                     <Image unoptimized src="https://raw.githubusercontent.com/faskey37/My-Portfolio/main/WhatsApp Image 2025-08-24 at 23.43.36_02c464b0.jpg" data-ai-hint="profile picture" alt="Tauqeer Khan" width={400} height={400} className="relative rounded-lg shadow-xl z-10 transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-2" />
                 </div>
                 <div className="md:col-span-3 space-y-6">
