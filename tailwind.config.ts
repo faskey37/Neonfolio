@@ -11,7 +11,7 @@ export default {
     extend: {
       fontFamily: {
         body: ['Poppins', 'sans-serif'],
-        headline: ['Poppins', 'sans-serif'],
+        headline: ['"Cinzel Decorative"', 'serif'],
         mono: ['Fira Code', 'monospace'],
       },
       colors: {
@@ -53,6 +53,9 @@ export default {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+       boxShadow: {
+        fiery: '0 0 35px 5px hsla(var(--primary), 0.5), 0 0 10px 0px hsla(var(--accent), 0.7)',
       },
       keyframes: {
         'accordion-down': {
