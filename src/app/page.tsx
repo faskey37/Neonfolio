@@ -14,6 +14,7 @@ import { Achievements } from '@/components/achievements';
 import { VideoGallery } from '@/components/video-gallery';
 import { Volunteering } from '@/components/volunteering';
 import { Certificates } from '@/components/certificates';
+import { FreelanceWork } from '@/components/freelance-work';
 
 export default function Home() {
   return (
@@ -29,6 +30,7 @@ export default function Home() {
         <Timeline />
         <FeaturedSkills />
         <Projects />
+        <FreelanceWork />
         <VideoGallery />
         <Achievements />
         <Volunteering />
