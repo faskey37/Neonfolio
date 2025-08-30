@@ -20,7 +20,7 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary/5"
     >
       <div className="absolute inset-0 z-0 opacity-30">
-        <div className="absolute top-[-50%] left-[-50%] h-[200%] w-[200%] bg-[radial-gradient(rgba(59,130,246,0.1)_1px,transparent_1px)] [background-size:30px_30px] animate-[movePattern_60s_linear_infinite]"></div>
+        <div className="absolute top-[-50%] left-[-50%] h-[200%] w-[200%] bg-[radial-gradient(rgba(153,0,0,0.1)_1px,transparent_1px)] [background-size:30px_30px] animate-[movePattern_60s_linear_infinite]"></div>
       </div>
       
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -65,7 +65,7 @@ export function Hero() {
               <Image
                 unoptimized
                 src="https://raw.githubusercontent.com/faskey37/My-Portfolio/main/my.jpg"
-                data-ai-hint="developer working"
+                data-ai-hint="powerful warrior illustration"
                 alt="Developer illustration"
                 width={800}
                 height={800}
