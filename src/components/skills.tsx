@@ -1,88 +1,244 @@
-import { Code, Server, Settings, Cpu, Database, GitBranch } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Code, Server, Settings, Zap, Sparkles, Target } from 'lucide-react';
+import Link from 'next/link';
 
 const skillCategories = [
   {
     title: "Frontend Development",
     icon: <Code className="w-6 h-6" />,
+    color: "from-blue-500 to-cyan-500",
     skills: [
-      { name: "HTML5 & CSS3", level: 95 },
-      { name: "JavaScript", level: 90 },
-      { name: "React", level: 85 },
-      { name: "Bootstrap", level: 88 },
-      { name: "Tailwind", level: 80 },
-      { name: "Responsive Design", level: 92 },
+      { name: "HTML5 & CSS3", level: 95, description: "Semantic markup and modern CSS features" },
+      { name: "JavaScript", level: 90, description: "ES6+, DOM manipulation, async programming" },
+      { name: "React", level: 85, description: "Components, hooks, state management" },
+      { name: "Bootstrap", level: 88, description: "Rapid prototyping and responsive grids" },
+      { name: "Tailwind", level: 80, description: "Utility-first CSS framework" },
+      { name: "Responsive Design", level: 92, description: "Mobile-first, cross-device compatibility" },
     ],
   },
   {
     title: "Backend Development",
     icon: <Server className="w-6 h-6" />,
+    color: "from-green-500 to-emerald-500",
     skills: [
-        { name: "Java", level: 70 },
-        { name: "Python", level: 65 },
-        { name: "Firebase", level: 85 },
-        { name: "MySQL", level: 78 },
-        { name: "PostgreSQL", level: 75 },
-        { name: "Basic APIs", level: 85 },
+      { name: "Java", level: 70, description: "OOP concepts and basic applications" },
+      { name: "Python", level: 65, description: "Scripting and backend development" },
+      { name: "Firebase", level: 85, description: "Authentication, Firestore, real-time DB" },
+      { name: "MySQL", level: 78, description: "Database design and complex queries" },
+      { name: "PostgreSQL", level: 75, description: "Advanced queries and performance" },
+      { name: "Basic APIs", level: 85, description: "RESTful API design and development" },
     ],
   },
   {
-    title: "Other Skills",
+    title: "Tools & Others",
     icon: <Settings className="w-6 h-6" />,
+    color: "from-purple-500 to-pink-500",
     skills: [
-        { name: "Git & GitHub", level: 90 },
-        { name: "Docker", level: 70 },
-        { name: "Wix", level: 65 },
-        { name: "SQL Server", level: 75 },
-        { name: "UI/UX Design", level: 80 },
+      { name: "Git & GitHub", level: 90, description: "Version control and collaboration" },
+      { name: "Docker", level: 70, description: "Containerization and deployment" },
+      { name: "Wix", level: 65, description: "Website building and customization" },
+      { name: "SQL Server", level: 75, description: "Database management and queries" },
+      { name: "UI/UX Design", level: 80, description: "User-centered design principles" },
     ],
   }
 ];
 
 export function Skills() {
+  const [activeSkill, setActiveSkill] = useState<{category: string, skill: string, description: string} | null>(null);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const skillBarVariants = {
+    hidden: { width: 0 },
+    visible: (level: number) => ({
+      width: `${level}%`,
+      transition: {
+        duration: 1.2,
+        ease: "easeOut",
+        delay: 0.2
+      }
+    })
+  };
+
   return (
     <section id="skills" className="py-24 sm:py-32 bg-background relative overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-5" style={{backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`}}></div>
-        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          <div className="absolute text-primary/10 text-7xl font-mono font-bold top-10 left-10 animate-[float_10s_ease-in-out_infinite]">&#123;...&#125;</div>
-          <div className="absolute text-secondary/10 text-6xl font-mono font-bold bottom-10 right-10 animate-[float-alt_8s_ease-in-out_infinite]">[Array]</div>
-          <div className="absolute text-accent/10 text-5xl font-mono font-bold top-1/2 right-1/4 animate-[float_7s_ease-in-out_infinite]">={'>'}</div>
-          <div className="absolute text-primary/5 text-8xl font-mono font-bold bottom-1/4 left-1/5 animate-[float-alt_11s_ease-in-out_infinite]">&lt;div&gt;</div>
-          <div className="absolute text-secondary/5 text-4xl font-mono font-bold top-1/3 right-1/5 animate-[float_9s_ease-in-out_infinite]">.map()</div>
-        </div>
-        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center max-w-2xl mx-auto">
-                <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">
-                    My Technical <span className="text-gradient">Toolbelt</span>
-                </h2>
-                <div className="mt-4 text-lg leading-8 text-muted-foreground">
-                    A snapshot of the primary technologies and tools I use to bring ideas to life, from frontend design to backend implementation.
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <Zap className="w-4 h-4" />
+            Technical Skills
+          </div>
+          <h2 className="font-headline text-4xl sm:text-5xl font-bold tracking-tight mb-4">
+            My <span className="text-gradient">Toolkit</span>
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Technologies and tools I use to build digital experiences
+          </p>
+        </motion.div>
+
+        {/* Skills Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+        >
+          {skillCategories.map((category) => (
+            <motion.div
+              key={category.title}
+              variants={cardVariants}
+              className="group"
+            >
+              {/* Main Card */}
+              <div className="bg-card border border-border rounded-xl p-6 shadow-sm transition-all duration-200 hover:border-primary/30 hover:shadow-md">
+                
+                {/* Category Header */}
+                <div className="flex items-center gap-3 mb-6">
+                  <div className={`w-10 h-10 bg-gradient-to-br ${category.color} rounded-lg flex items-center justify-center`}>
+                    <div className="text-white">
+                      {category.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground">
+                    {category.title}
+                  </h3>
                 </div>
-            </div>
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            {skillCategories.map((category) => (
-                <div key={category.title} className="bg-card p-6 rounded-lg shadow-lg border border-border/20 transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
-                    <h3 className="text-xl font-bold font-headline mb-6 flex items-center gap-3">
-                        <span className="text-gradient">{category.icon}</span>
-                        {category.title}
-                    </h3>
-                    <ul className="space-y-4">
-                        {category.skills.map(skill => (
-                            <li key={skill.name}>
-                                <span className="font-medium text-muted-foreground">{skill.name}</span>
-                                <div className="w-full bg-primary/10 rounded-full h-2.5 mt-1">
-                                    <div 
-                                      className="bg-gradient-to-r from-primary to-secondary h-2.5 rounded-full transition-all duration-700 ease-out" 
-                                      style={{width: `${skill.level}%`}}
-                                    ></div>
-                                </div>
-                                <div className="text-xs text-muted-foreground mt-1 text-right">{skill.level}%</div>
-                            </li>
-                        ))}
-                    </ul>
+
+                {/* Skills List */}
+                <div className="space-y-4">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div
+                      key={skill.name}
+                      className="skill-item"
+                      onMouseEnter={() => setActiveSkill({
+                        category: category.title,
+                        skill: skill.name,
+                        description: skill.description
+                      })}
+                      onMouseLeave={() => setActiveSkill(null)}
+                    >
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="font-medium text-foreground text-sm">
+                          {skill.name}
+                        </span>
+                        <span className="text-xs font-semibold text-muted-foreground">
+                          {skill.level}%
+                        </span>
+                      </div>
+
+                      <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+                        <motion.div
+                          custom={skill.level}
+                          variants={skillBarVariants}
+                          initial="hidden"
+                          whileInView="visible"
+                          viewport={{ once: true }}
+                          className={`h-2 rounded-full bg-gradient-to-r ${category.color}`}
+                        />
+                      </div>
+                    </div>
+                  ))}
                 </div>
-            ))}
-            </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Skill Description - Fixed Position */}
+        <div className="mt-8 min-h-[80px]">
+          {activeSkill && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="bg-card border border-border rounded-lg p-4 max-w-md mx-auto"
+            >
+              <div className="flex items-start gap-3">
+                <Target className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-foreground text-sm">
+                    {activeSkill.skill}
+                  </h4>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    {activeSkill.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          )}
         </div>
+
+        {/* Skills Summary */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
+          <div className="bg-card/50 border border-border rounded-xl p-6 max-w-2xl mx-auto">
+            <h3 className="text-xl font-bold mb-3">Continuous Learning</h3>
+            <p className="text-muted-foreground mb-4">
+              Always expanding my skill set through projects, courses, and hands-on experience
+            </p>
+            <Link href="#projects">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-secondary text-primary-foreground rounded-lg font-bold hover:shadow-lg transition-all duration-300 cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4" />
+                View Projects
+              </motion.button>
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+
+      <style jsx>{`
+        .skill-item {
+          transition: all 0.2s ease;
+        }
+        
+        .skill-item:hover {
+          transform: translateX(4px);
+        }
+        
+        .skill-item:hover .text-foreground {
+          color: hsl(var(--primary));
+        }
+      `}</style>
     </section>
   );
 }
